@@ -1,0 +1,11 @@
+.container {
+    width:600px;
+    height:600px;
+    border:10px solid green;
+    background-color: blue;
+   }
+   .row{
+    height: 100px;
+    width:  550px;
+
+   }
