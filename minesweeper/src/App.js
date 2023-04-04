@@ -3,6 +3,7 @@ import './App.css';
 import React,{useState, useEffect} from 'react';
 import Board from './component/Board';
 import Timer from './component/Timer'
+import Difficulty from './component/Difficulty';
 
 export const Minesweeper = React.createContext()
 
@@ -12,8 +13,9 @@ function App() {
  const [board, setBoard] = useState([])
  const [message, setMessage] = useState("");
  const [gameOver, setGameOver] = useState(false);
- 
 
+ const [difficulty, setDifficulty] = useState("easy")
+ 
 
 useEffect(() => {
   const newBoard = generateBoard();
@@ -139,11 +141,23 @@ const renderBoard = () => {
   });
 };
 
+ const getBombs = () => {
+  switch(difficulty){
+    case "medium":
+      return 15;
+    case "hard":
+      return 20;
+    default:
+      return 10
+  }
+}
+ const [bombs, setBombs] = useState(getBombs())
 
  
   return (
-    <Minesweeper.Provider value={{board, setBoard, gameOver, setGameOver}}>
+    <Minesweeper.Provider value={{board, setBoard, gameOver, setGameOver, difficulty, setDifficulty, bombs, setBombs}}>
       <h1>Minesweeper</h1>
+      <Difficulty/>
        <div className="message">{message}</div>
       <div className="board">{renderBoard()}</div> 
      {/* <Board/> */}
